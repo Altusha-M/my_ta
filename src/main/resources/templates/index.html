@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form onsubmit="alert('submit!'); return false">
+    <script>
+        let form = document.createElement('form');
+        form.innerHTML = '<input name="q" value="test">';
+        // перед отправкой формы, её нужно вставить в документ
+        document.body.append(form);
+        let subm = document.createElement('form');
+        subm.innerHTML = '<input type="button" name="submit" value="SEND" id="click">';
+        document.body.append(subm);
+        // let value = document.getElementById("txt").value;
+        document.getElementById('click').onclick = function() {
+            alert();
+            let x = new XMLHttpRequest();
+            x.open("GET", "api/", true);
+            x.send();
+        };
+
+        subm.action = 'api/';
+        subm.method = 'GET';
+        // subm.submit();
+        // var x = new XMLHttpRequest();
+        // x.open("GET", "api/123", true);
+        // x.send({123:1233213});
+        // x.onload = function (){
+        //     alert( x.responseText);
+        // }
+    </script>
+</form>
+
+
+
+</body>
+</html>

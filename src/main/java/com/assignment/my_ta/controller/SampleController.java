@@ -3,23 +3,46 @@ package com.assignment.my_ta.controller;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/api")
 public class SampleController {
-//    Logger logger = Logger.getLogger(SampleController.class);
 
-    @Autowired
     AmqpTemplate template;
 
-    @RequestMapping("/emit/{message}")
-    @ResponseBody
+    @Autowired
+    public SampleController(AmqpTemplate template) {
+        this.template = template;
+    }
+
+    @GetMapping("/{message}")
     String myQueue(@PathVariable String message) {
-//        logger.info("Emit to queue1");
         System.out.println("Emit to myQueue1");
         template.convertAndSend("myQueue1", message);
-        return "Emit to queue";
+        System.out.println(message);
+        return "index";
+    }
+
+    @PostMapping("/{message}")
+    String myQueuePost(@PathVariable String message) {
+        System.out.println("Emit to myQueue1");
+        template.convertAndSend("myQueue1", message);
+        System.out.println(message);
+        return "index";
+    }
+
+    @PutMapping("/{message}")
+    String myQueuePut(@PathVariable String message) {
+        System.out.println("Emit to myQueue1");
+        template.convertAndSend("myQueue1", message);
+        return "index";
+    }
+
+    @DeleteMapping("/{message}")
+    String myQueueDelete(@PathVariable String message) {
+        System.out.println("Emit to myQueue1");
+        template.convertAndSend("myQueue1", message);
+        return "index";
     }
 }
