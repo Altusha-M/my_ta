@@ -6,35 +6,29 @@
 </head>
 <body>
 
-<form onsubmit="alert('submit!'); return false">
+<form action="/api" method="post">
     <script>
         let form = document.createElement('form');
-        form.innerHTML = '<input name="q" value="test">';
+        form.innerHTML = '<input id="text" name="q" value="test">';
         // перед отправкой формы, её нужно вставить в документ
         document.body.append(form);
         let subm = document.createElement('form');
-        subm.innerHTML = '<input type="button" name="submit" value="SEND" id="click">';
+        subm.innerHTML = '<input type="button" id="click" name="submit" value="SEND">';
         document.body.append(subm);
         // let value = document.getElementById("txt").value;
-        document.getElementById('click').onclick = function() {
-            alert();
-            let x = new XMLHttpRequest();
-            x.open("GET", "api/", true);
-            x.send();
+        document.getElementById("click").onclick = function () {
+            alert(document.getElementById("text").value);
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "api", true);
+            xhr.setRequestHeader("Content-type", "application/json");// charset=utf-8");
+            xhr.send({
+                "msg": document.getElementById("text").value
+            });
+            alert(xhr.toString());
         };
 
-        subm.action = 'api/';
-        subm.method = 'GET';
-        // subm.submit();
-        // var x = new XMLHttpRequest();
-        // x.open("GET", "api/123", true);
-        // x.send({123:1233213});
-        // x.onload = function (){
-        //     alert( x.responseText);
-        // }
     </script>
 </form>
-
 
 
 </body>
