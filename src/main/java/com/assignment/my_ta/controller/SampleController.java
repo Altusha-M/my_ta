@@ -1,7 +1,7 @@
 package com.assignment.my_ta.controller;
 
-import com.assignment.my_ta.POJO.Message;
-import org.springframework.amqp.core.AmqpTemplate;
+import com.assignment.my_ta.POJO.MyMessage;
+import com.assignment.my_ta.service.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,19 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class SampleController {
 
-    AmqpTemplate template;
+    private final Producer producer;
 
     @Autowired
-    public SampleController(AmqpTemplate template) {
-        this.template = template;
+    SampleController(Producer producer) {
+        this.producer = producer;
     }
 
     @PostMapping
-    public Message myQueuePost(@RequestBody Message msg) {
-        System.out.println("Emit to myQueue1");
-//        template.convertAndSend("myQueue1", "1");
-        System.out.println(msg.toString());
-        return new Message("1");
+    public void sendMessageToKafkaTopic(@RequestBody MyMessage message) {
+        this.producer.sendMessage(message.getMessageText());
+        System.out.println(message.toString());
     }
 
 }

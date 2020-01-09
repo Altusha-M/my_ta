@@ -1,12 +1,12 @@
 package com.assignment.my_ta.POJO;
 
-public class Message {
+public class MyMessage {
 
-    public Message(String messageText) {
+    public MyMessage(String messageText) {
         this.messageText = messageText;
     }
 
-    public Message() {
+    public MyMessage() {
     }
 
     String messageText;
@@ -21,7 +21,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
+        return "{" +
                 "messageText='" + messageText + '\'' +
                 '}';
     }
