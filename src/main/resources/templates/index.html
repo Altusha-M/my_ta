@@ -17,16 +17,14 @@
         document.body.append(subm);
         // let value = document.getElementById("txt").value;
         document.getElementById("click").onclick = function () {
-            alert(document.getElementById("text").value);
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "api", true);
-            xhr.setRequestHeader("Content-type", "application/json");// charset=utf-8");
-            xhr.send({
-                "msg": document.getElementById("text").value
-            });
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.send(JSON.stringify({
+                messageText : document.getElementById("text").value
+            }));
             alert(xhr.toString());
         };
-
     </script>
 </form>
 

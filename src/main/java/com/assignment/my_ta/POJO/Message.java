@@ -2,6 +2,13 @@ package com.assignment.my_ta.POJO;
 
 public class Message {
 
+    public Message(String messageText) {
+        this.messageText = messageText;
+    }
+
+    public Message() {
+    }
+
     String messageText;
 
     public String getMessageText() {
@@ -18,4 +25,5 @@ public class Message {
                 "messageText='" + messageText + '\'' +
                 '}';
     }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.io.PushbackInputStream;
 import java.util.List;
 import java.util.Map;
@@ -23,13 +24,12 @@ public class SampleController {
         this.template = template;
     }
 
-    @PostMapping(consumes = "application/json")
-    public ResponseEntity<Message> myQueuePost(@RequestBody List<Message> msgs) {
-
+    @PostMapping
+    public Message myQueuePost(@RequestBody Message msg) {
         System.out.println("Emit to myQueue1");
 //        template.convertAndSend("myQueue1", "1");
-        System.out.println(msgs.toString());
-        return new ResponseEntity<Message>(new Message(), HttpStatus.OK);
+        System.out.println(msg.toString());
+        return new Message("1");
     }
 
 }
